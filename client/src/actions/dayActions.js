@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_DAYS, DAYS_LOADING, GET_DAY, ADD_DAY, UPDATE_DAY } from './types';
+import { GET_DAYS, DAYS_LOADING, GET_DAY, ADD_DAY, UPDATE_DAY, GET_DAYS_BY_DATE } from './types';
 
 export const getDays = () => dispatch => {
 	dispatch(setDaysLoading());
@@ -8,6 +8,18 @@ export const getDays = () => dispatch => {
 		.then(res => 
 			dispatch({
 				type: GET_DAYS,
+				payload: res.data
+			}))
+};
+
+export const getDaysByDate = (date) => dispatch => {
+	dispatch(setDaysLoading());
+	console.log('day passed through: ' + date);
+	axios
+		.get(`/api/days?date=${date}`)
+		.then(res => 
+			dispatch({
+				type: GET_DAYS_BY_DATE,
 				payload: res.data
 			}))
 };

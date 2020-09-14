@@ -13,3 +13,4 @@ export const DAYS_LOADING = 'GET_DAYS';
 export const GET_DAY = 'GET_DAY';
 export const ADD_DAY = 'ADD_DAY';
 export const UPDATE_DAY = 'UPDATE_DAY'
+export const GET_DAYS_BY_DATE = 'GET_DAYS_BY_DATE';

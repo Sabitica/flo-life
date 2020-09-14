@@ -22,6 +22,8 @@ class AppNavbar extends Component {
 		});
 	}
 
+	// 	<Collapse isOpen={this.state.isOpen} navbar> // was before <nav>
+
 	render() {
 
 		return (
@@ -35,7 +37,6 @@ class AppNavbar extends Component {
 					<Container>
 						<NavbarBrand href="/">Flo Life</NavbarBrand>
 						<NavbarToggler onClick={this.toggle} />
-						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" navbar>
 								<NavItem>
 									<NavLink href="/">
@@ -43,7 +44,6 @@ class AppNavbar extends Component {
 									</NavLink>
 								</NavItem>
 							</Nav>
-						</Collapse>
 					</Container>
 
 				</Navbar>

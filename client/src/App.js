@@ -1,8 +1,6 @@
 import React from 'react';
 
 import AppNavbar from './components/AppNavbar'
-import ShoppingList from './components/ShoppingList'
-import ItemModal from './components/ItemModal';
 import Day from './components/Day';
 import { Container } from 'reactstrap'
 

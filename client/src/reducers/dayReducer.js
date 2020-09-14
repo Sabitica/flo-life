@@ -1,7 +1,8 @@
-import { GET_DAYS, DAYS_LOADING, GET_DAY } from '../actions/types';
+import { GET_DAYS, DAYS_LOADING, GET_DAY, GET_DAYS_BY_DATE } from '../actions/types';
 
 const initialState = {
 	days: [],
+	currentDay: {},
 	loading: false
 }
 
@@ -13,6 +14,13 @@ export default function(state = initialState, action) {
 				days: action.payload,
 				loading: false
 			}
+		case GET_DAYS_BY_DATE: 
+			console.log(action.payload[0]);
+			return {
+				...state,
+				currentDay: action.payload[0],
+				loading: false
+			}	
 		case DAYS_LOADING: 
 			return {
 				...state,
