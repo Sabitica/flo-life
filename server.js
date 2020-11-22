@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // our ORM
 const bodyParser = require('body-parser');
 
 const items = require('./routes/api/items');

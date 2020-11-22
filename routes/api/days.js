@@ -26,9 +26,7 @@ router.get('/', (req, res) => {
 			date: {$gte: queriedDateMin, $lte: queriedDate}
 		})
 		.then(days => res.json(days))
-		//.then(days => console.log(days))
 		.catch(e => console.log(e));
-
 	} else {
 		Day.find()
 		.then(days => res.json(days))

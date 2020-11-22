@@ -3,7 +3,8 @@ import { GET_DAYS, DAYS_LOADING, GET_DAY, GET_DAYS_BY_DATE } from '../actions/ty
 const initialState = {
 	days: [],
 	currentDay: {},
-	loading: false
+	loading: false,
+	getDaysCalled: false
 }
 
 export default function(state = initialState, action) {
@@ -19,7 +20,8 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				currentDay: action.payload[0],
-				loading: false
+				loading: false,
+				getDaysCalled: true
 			}	
 		case DAYS_LOADING: 
 			return {

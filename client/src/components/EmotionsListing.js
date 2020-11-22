@@ -11,24 +11,18 @@ class EmotionsListing extends Component {
 		this.props.getEmotions();
 	};
 
-	emotionClicked = (e, id) => {
-
-		//console.log(id);
-	}
-
 	render() {
 
 		const { emotions } = this.props.emotion,
 				{ day } = this.props;
 
-		if (day.emotions === undefined) {
+		if (day.emotions === undefined || day === undefined) {
 			return null;
 		}
 
-				// submit should be like ...day, emotions 
+		// submit should be like ...day, emotions 
 
 		// TransitionGroup wrapped around {emotions.map}
-		
 
 		emotions.map(({_id}, index) => {
 			if(day.emotions.includes(_id)) {
@@ -38,8 +32,6 @@ class EmotionsListing extends Component {
 			}			
 		})
 
-		console.log(emotions);
-
 		return (
 
 			<Container>
@@ -48,17 +40,25 @@ class EmotionsListing extends Component {
 
 				<ListGroup>
 						{emotions.map(({ _id, name, good, selected }) => (
-								<CSSTransition key={_id} timeout={500} classNames="fade">
 
-									<Button key={_id}
-										style={{ backgroundColor: selected ? 'red' : 'pink', 
-												 color: 'black'}}
-										onClick={this.emotionClicked.bind(this, _id)}		 
-									>										
-										{name} is {good ? 'good' : 'not good'}
-									</Button>
+									<div key={_id}>
+										{selected &&
+											<input 
+												defaultChecked="checked"
+												type="checkbox" 
+												onChange={this.props.onChangeValue}
+												name={ _id } />
+										}
+										{!selected &&
+											<input 
+												type="checkbox" 
+												onChange={this.props.onChangeValue}
+												name= { _id } />
+										}
 
-								</CSSTransition>
+										
+										<label htmlFor="emotion">{name}</label>
+									</div>
 							))
 						}
 				</ListGroup>

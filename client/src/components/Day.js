@@ -13,20 +13,39 @@ class Day extends Component {
 					+ '-' 
 					+ String("00" + (new Date().getMonth() + 1)).slice(-2)
 					+ '-' 
-					+ String("00" + new Date().getDate()).slice(-2)
+					+ String("00" + new Date().getDate()).slice(-2),
+		emotions: []
 	}
+
+	emotions = [];
 
 
 	componentDidMount() {
-		//this.props.getDaysByDate(this.state.formattedDate)
+		// this.props.getDaysByDate(this.state.formattedDate)
 		//this.props.getDaysByDate('2020-05-07')
 		this.props.getDaysByDate('2020-04-29');
+		// this.props.getDaysByDate('2020-04-03');
 	};
 
-	submitDay = (today) => {
+	// this will only work for emotions right now
+	onFormChange = (event) => {
+		let em = this.emotions;
+		const target = event.target,
+				value = target.type === 'checkbox' ? target.checked : target.value,
+				name = target.name;
+		if (value) {
+			em.push(name)
+		} else {
+			em = em.filter(function(e) { return e !== name })
+		}
+		this.submitDay(this.state.formattedDate, em);
+	}
+
+	submitDay = (today, emotions) => {
 		console.log(today);
 		const newDay = {
-			"date": today
+			"date": today,
+			"emotions": emotions
 		};
 		this.props.addDay(newDay);
 	}
@@ -35,7 +54,13 @@ class Day extends Component {
 		const { today, formattedDate } = this.state, 
 			  { currentDay } = this.props.day;	
 
-		//console.log(currentDay);
+			  if (this.props.day === undefined) {
+			  	return null;
+			  }
+
+			  if (this.props.day.getDaysCalled) {
+			  	this.emotions = currentDay.emotions;
+			  }
 
 		return (
 
@@ -44,7 +69,12 @@ class Day extends Component {
 				<Button
 				onClick={this.submitDay.bind(this, formattedDate)}
 				>Save day (only for creating a new day)</Button>
-				<EmotionsListing day={currentDay} />
+				<EmotionsListing 
+					day={currentDay}
+					onChangeValue={this.onFormChange}
+
+
+				/>
 				<Button color="dark">Submit</Button>
 			</Container>
 
@@ -58,7 +88,7 @@ Day.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-	day: state.day
+	day: state.day,
 });
 
 
